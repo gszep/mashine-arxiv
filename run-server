@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source env/bin/activate
+watchify mains/filamentRatchets/main.js -o public/mains/filamentRatchets.js &
+node server.js
