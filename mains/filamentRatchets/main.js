@@ -2,12 +2,11 @@
 Main asyncronous monte carlo simulation of filament ratchets.
 2017. G. Szep
  */
-process.env.UV_THREADPOOL_SIZE = 50
 
 // importing libraries
 const Poisson = require('./lib/random/poisson'),
 	Particle = require('./lib/particle'),
-	Cytoplasm = require('./lib/cyto')
+	Space = require('./lib/space')
 
 // initialising simulation canvas
 var d3 = require('d3')
@@ -26,7 +25,6 @@ var x = nj.array([250.0,250.0]),
 	v = nj.array([0.0,0.0])
 
 var positions = {}
-new Particle(x,v)
-for (var i = 0; i < 5; i++ ){
-
+for (var i = 0; i < 1000; i++ ){
+	new Particle(x,v)
 }

@@ -4,7 +4,7 @@ Dresses an express application with views and static files
  */
 
 var express = require('express')
-var Site = module.exports = function() {
+var App = module.exports = function() {
 
 	// initialise express app
 	this.app = express()
@@ -16,14 +16,14 @@ var Site = module.exports = function() {
 }
 
 // serve static files and use templating system
-Site.prototype.initialise = function() {
+App.prototype.initialise = function() {
 
 	this.app.use(express.static(__dirname + '/public'))
 	this.app.set('view engine', 'ejs')
 }
 
 // paths to views
-Site.prototype.get_views = function() {
+App.prototype.get_views = function() {
 
 	this.app.get('/', function(req, res) {
 		res.render('index')

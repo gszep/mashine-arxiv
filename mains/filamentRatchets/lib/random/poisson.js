@@ -3,22 +3,28 @@ Module for generating poisson events.
 2017. G. Szep
  */
 const EventEmitter = require('events').EventEmitter,
+	setImmediate = require('timers').setImmediate,
 	random = require("random-js")()
 
 var Poisson = module.exports = function(rate, name, event) {
 
 	// initialising objects, params
-	this.generator = new EventEmitter()
-	this.rate = rate
+	this.emitter = new EventEmitter()
 	this.event = event
+
+	this.rate = rate
 	this.name = name
 
-	// setting asyncronous event
+	// setting asyncronous events and handle errors
 	var parent = this
-	this.generator.on(name, () => {
+	this.emitter.on( this.name, () => {
 		setImmediate( () => {
 			parent.event()
 		})
+	})
+
+	this.emitter.on('error', error => {
+		console.error('[Poisson] Error ' + error )
 	})
 
 	// begin sampling poisson process
@@ -30,6 +36,10 @@ Poisson.prototype.start = function() {
 	this.happen()
 }
 
+Poisson.prototype.stop = function() {
+	this.happening = false
+}
+
 Poisson.prototype.happen = function() {
 	if ( this.happening ){
 
@@ -38,7 +48,7 @@ Poisson.prototype.happen = function() {
 
 		// delayed recursive timeout loop
 		this.loop = setTimeout( () => {
-			this.generator.emit(this.name)
+			this.emitter.emit(this.name)
 			this.happen()
 
 		}, this.interval )
@@ -49,11 +59,6 @@ Poisson.prototype.happen = function() {
 		//	this.happen()
 		//}
 	} else {
-
-		delete(this.generator)
+		delete(this.emitter)
 	}
-}
-
-Poisson.prototype.stop = function() {
-	this.happening = false
 }

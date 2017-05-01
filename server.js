@@ -4,13 +4,11 @@ Module initialising server with site and reatime socket.
  */
 
 // serve app with views and static files
-console.log('[Node] Configuring Site')
-const Site = require('./site'),
-	site = new Site()
+console.log('[Node] Configuring Application')
+const App = require('./app'),
+	app = new App()
 
 // setup realtime i/o on socket
-const server = require('http').Server(site),
-	socket = require('socket.io')(server)
-
+const server = require('http').Server(app)
 server.listen(80)
-console.log('[Node] Socket Established')
+console.log('[Node] HTTP Server Listening')

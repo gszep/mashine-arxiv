@@ -21,21 +21,12 @@ var Particle = module.exports = function(position,velocity) {
 		'diffuse', function(){
 			parent.diffuse()
 	})
-
-	this.events.branch = new Poisson( 0.001,
-		'branch', function(){
-			parent.branch()
-	})
 }
 
 Particle.prototype.diffuse = function() {
 	var step = nj.random(2).multiply(2).subtract(1).multiply(rate)
 	this.position.add(step,false)
 	this.update()
-}
-
-Particle.prototype.branch = function() {
-	new Particle(this.position,this.velocity)
 }
 
 Particle.prototype.update = function() {
