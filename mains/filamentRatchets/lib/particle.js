@@ -2,8 +2,8 @@
 Module that defines the particle.
 2017. G. Szep
  */
-const random = require("random-js")(),
-	nj = require("numjs")
+const random = require('random-js')(),
+	nj = require('numjs')
 
 const Poisson = require('./random/poisson')
 var Particle = module.exports = function(position,velocity) {
@@ -37,13 +37,13 @@ Particle.prototype.update = function() {
 
 Particle.prototype.show = function() {
 
-	if ( this.line == undefined ) {
+	if ( this.draw == undefined ) {
 
-		this.line = canvas.append("circle")
-		this.line.attr("r",2.7).style("fill","green")
+		this.draw = canvas.append("circle")
+		this.draw.attr("r",2.7).style("fill","green")
 	}
 
 	// update position
-	this.line.attr("cx",this.position.get(0))
-	this.line.attr("cy",this.position.get(1))
+	this.draw.attr("cx",this.position.get(0))
+	this.draw.attr("cy",this.position.get(1))
 }

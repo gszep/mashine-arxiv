@@ -24,7 +24,23 @@ $('#canvas').mousemove(function(mouse){
 var x = nj.array([250.0,250.0]),
 	v = nj.array([0.0,0.0])
 
-var positions = {}
-for (var i = 0; i < 1000; i++ ){
-	new Particle(x,v)
+var space = new Space()
+for (var i = 0; i < 500; i++ ){
+	space.add_particle( new Particle(x,v) )
 }
+//space.update_partitions()
+
+var happen = function() {
+
+	// delayed recursive timeout loop
+	this.loop = setTimeout( () => {
+
+		space.update_centroids()
+		space.update_partitions()
+		console.log(space.centroids)
+		happen()
+
+	}, 3000 )
+}
+
+happen()

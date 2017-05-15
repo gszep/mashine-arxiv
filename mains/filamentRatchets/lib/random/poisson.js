@@ -4,7 +4,7 @@ Module for generating poisson events.
  */
 const EventEmitter = require('events').EventEmitter,
 	setImmediate = require('timers').setImmediate,
-	random = require("random-js")()
+	random = require('random-js')()
 
 var Poisson = module.exports = function(rate, name, event) {
 
