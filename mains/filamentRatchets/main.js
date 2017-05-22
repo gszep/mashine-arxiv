@@ -21,14 +21,13 @@ $('#canvas').mousemove(function(mouse){
 })
 
 // simulation
-var x = nj.array([250.0,250.0]),
-	v = nj.array([0.0,0.0])
-
 var space = new Space()
-for (var i = 0; i < 500; i++ ){
+for (var i = 0; i < 1000; i++ ){
+	var x = nj.array([500.0*Math.random(),500.0*Math.random()]),
+		v = nj.array([0.0,0.0])
+
 	space.add_particle( new Particle(x,v) )
 }
-//space.update_partitions()
 
 var happen = function() {
 
@@ -37,10 +36,10 @@ var happen = function() {
 
 		space.update_centroids()
 		space.update_partitions()
-		console.log(space.centroids)
+
 		happen()
 
-	}, 3000 )
+	}, 3 )
 }
 
 happen()

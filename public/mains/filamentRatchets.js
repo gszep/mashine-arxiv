@@ -36666,7 +36666,7 @@ var NdArray = require('../ndarray');
 var __ = require('../utils');
 var rgb2gray = require('./rgb2gray');
 
-var doSobel = require('cwise/lib/wrapper')({"args":["array","array",{"offset":[-1,-1],"array":1},{"offset":[-1,0],"array":1},{"offset":[-1,1],"array":1},{"offset":[0,-1],"array":1},{"offset":[0,1],"array":1},{"offset":[1,-1],"array":1},{"offset":[1,0],"array":1},{"offset":[1,1],"array":1}],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{var _inline_28_q=_inline_28_arg2_+2*_inline_28_arg3_+_inline_28_arg4_-_inline_28_arg7_-2*_inline_28_arg8_-_inline_28_arg9_,_inline_28_s=_inline_28_arg2_-_inline_28_arg4_+2*_inline_28_arg5_-2*_inline_28_arg6_+_inline_28_arg7_-_inline_28_arg9_;_inline_28_arg0_=Math.sqrt(_inline_28_s*_inline_28_s+_inline_28_q*_inline_28_q)}","args":[{"name":"_inline_28_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_28_arg1_","lvalue":false,"rvalue":false,"count":0},{"name":"_inline_28_arg2_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_28_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_28_arg4_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_28_arg5_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_28_arg6_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_28_arg7_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_28_arg8_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_28_arg9_","lvalue":false,"rvalue":true,"count":2}],"thisVars":[],"localVars":["_inline_28_q","_inline_28_s"]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"doSobelBody","blockSize":64});
+var doSobel = require('cwise/lib/wrapper')({"args":["array","array",{"offset":[-1,-1],"array":1},{"offset":[-1,0],"array":1},{"offset":[-1,1],"array":1},{"offset":[0,-1],"array":1},{"offset":[0,1],"array":1},{"offset":[1,-1],"array":1},{"offset":[1,0],"array":1},{"offset":[1,1],"array":1}],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{var _inline_31_q=_inline_31_arg2_+2*_inline_31_arg3_+_inline_31_arg4_-_inline_31_arg7_-2*_inline_31_arg8_-_inline_31_arg9_,_inline_31_s=_inline_31_arg2_-_inline_31_arg4_+2*_inline_31_arg5_-2*_inline_31_arg6_+_inline_31_arg7_-_inline_31_arg9_;_inline_31_arg0_=Math.sqrt(_inline_31_s*_inline_31_s+_inline_31_q*_inline_31_q)}","args":[{"name":"_inline_31_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_31_arg1_","lvalue":false,"rvalue":false,"count":0},{"name":"_inline_31_arg2_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_31_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_31_arg4_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_31_arg5_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_31_arg6_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_31_arg7_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_31_arg8_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_31_arg9_","lvalue":false,"rvalue":true,"count":2}],"thisVars":[],"localVars":["_inline_31_q","_inline_31_s"]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"doSobelBody","blockSize":64});
 
 /**
  * Find the edge magnitude using the Sobel transform.
@@ -36705,7 +36705,7 @@ module.exports = function computeSobel (img) {
 var NdArray = require('../ndarray');
 var rgb2gray = require('./rgb2gray');
 
-var doIntegrate = require('cwise/lib/wrapper')({"args":["array","array","index",{"offset":[-1,-1],"array":0},{"offset":[-1,0],"array":0},{"offset":[0,-1],"array":0}],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{_inline_31_arg0_=0!==_inline_31_arg2_[0]&&0!==_inline_31_arg2_[1]?_inline_31_arg1_*_inline_31_arg1_+_inline_31_arg4_+_inline_31_arg5_-_inline_31_arg3_:0===_inline_31_arg2_[0]&&0===_inline_31_arg2_[1]?_inline_31_arg1_*_inline_31_arg1_:0===_inline_31_arg2_[0]?_inline_31_arg1_*_inline_31_arg1_+_inline_31_arg5_:_inline_31_arg1_*_inline_31_arg1_+_inline_31_arg4_}","args":[{"name":"_inline_31_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_31_arg1_","lvalue":false,"rvalue":true,"count":8},{"name":"_inline_31_arg2_","lvalue":false,"rvalue":true,"count":5},{"name":"_inline_31_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_31_arg4_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_31_arg5_","lvalue":false,"rvalue":true,"count":2}],"thisVars":[],"localVars":[]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"doIntegrateBody","blockSize":64});
+var doIntegrate = require('cwise/lib/wrapper')({"args":["array","array","index",{"offset":[-1,-1],"array":0},{"offset":[-1,0],"array":0},{"offset":[0,-1],"array":0}],"pre":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"body":{"body":"{_inline_28_arg0_=0!==_inline_28_arg2_[0]&&0!==_inline_28_arg2_[1]?_inline_28_arg1_*_inline_28_arg1_+_inline_28_arg4_+_inline_28_arg5_-_inline_28_arg3_:0===_inline_28_arg2_[0]&&0===_inline_28_arg2_[1]?_inline_28_arg1_*_inline_28_arg1_:0===_inline_28_arg2_[0]?_inline_28_arg1_*_inline_28_arg1_+_inline_28_arg5_:_inline_28_arg1_*_inline_28_arg1_+_inline_28_arg4_}","args":[{"name":"_inline_28_arg0_","lvalue":true,"rvalue":false,"count":1},{"name":"_inline_28_arg1_","lvalue":false,"rvalue":true,"count":8},{"name":"_inline_28_arg2_","lvalue":false,"rvalue":true,"count":5},{"name":"_inline_28_arg3_","lvalue":false,"rvalue":true,"count":1},{"name":"_inline_28_arg4_","lvalue":false,"rvalue":true,"count":2},{"name":"_inline_28_arg5_","lvalue":false,"rvalue":true,"count":2}],"thisVars":[],"localVars":[]},"post":{"body":"{}","args":[],"thisVars":[],"localVars":[]},"debug":false,"funcName":"doIntegrateBody","blockSize":64});
 
 /**
  * Compute Squared Sum Area Table, also known as the integral of the squared image
@@ -42263,7 +42263,9 @@ var Space = module.exports = function() {
 
 	this.metric = 'euclidian'
 	this.dimensions = 2
-	this.partition_limit = 100
+
+	this.upper_bound = 500
+	this.lower_bound = 100
 }
 
 Space.prototype.add_particle = function(particle) {
@@ -42274,6 +42276,7 @@ Space.prototype.add_particle = function(particle) {
 
 	// create partition if there are none
 	if ( Object.keys(this.partitions).length == 0 ){
+
 		var parition_id = random.uuid4().split('-')[0]
 		particle.draw.style("fill",intToRGB(hashCode(parition_id)))
 
@@ -42281,11 +42284,10 @@ Space.prototype.add_particle = function(particle) {
 		this.centroids[parition_id] = particle.position
 
 	} else { // otherwise add to closest partition
+
 		var parition_id = this.get_partition(particle)
 		particle.draw.style("fill",intToRGB(hashCode(parition_id)))
-
 		this.partitions[parition_id].push( particle_id )
-		this.update_centroids()
 	}
 }
 
@@ -42298,10 +42300,10 @@ Space.prototype.get_centroid = function(partition) {
 	// calculate partition centroid
 	partition.forEach( function(particle_id) {
 		var position = parent.particles[particle_id].position
-		centroid.add(position)
+		centroid.add(position,false)
 	})
 
-	centroid.divide(partition_size)
+	centroid.divide(partition_size,false)
 	return centroid
 }
 
@@ -42310,7 +42312,7 @@ Space.prototype.get_partition = function(particle) {
 	var shortest_distance = Infinity,
 		closest_partition
 
-	for ( var parition_id in this.partitions ){
+	for ( var parition_id in this.centroids ){
 		var centroid = this.centroids[parition_id]
 
 		// manhattan distance from particle to centroid
@@ -42337,39 +42339,38 @@ Space.prototype.update_centroids = function() {
 }
 
 Space.prototype.update_partitions = function() {
-	var parent = this
-
 	for ( var parition_id in this.partitions ){
-		var partition = this.partitions[parition_id]
 
-		if ( partition.length > this.partition_limit ){
+		var partition = this.partitions[parition_id],
+			centroid = this.centroids[parition_id],
+			parent = this
 
-			var parition_id = random.uuid4().split('-')[0],
-				particle_id = partition[0]
-				particle = this.particles[particle_id]
+		// split partitions that exceed particle limit
+		if ( this.upper_bound < partition.length ){
 
-			particle.draw.style("fill",intToRGB(hashCode(parition_id)))
-			this.partitions[parition_id] = [particle_id]
-			this.centroids[parition_id] = particle.position
+			var new_parition = random.uuid4().split('-')[0]
+			this.centroids[new_parition] = centroid.add(nj.random(2))
+			this.partitions[new_parition] = []
 
-
-		} else {
-
-			partition.forEach( function(particle_id) {
-				var particle = parent.particles[particle_id]
-
-				// check whether particle moved between partitions
-				var current_partition = parent.get_partition(particle)
-				if ( parition_id != current_partition ){
-
-					var index = parent.partitions[parition_id].indexOf(particle_id)
-					parent.partitions[parition_id].splice(index,1)
-
-					parent.partitions[current_partition].push(particle_id)
-					particle.draw.style("fill",intToRGB(hashCode(current_partition)))
-				}
-			})
 		}
+
+		// reallocate particles
+		partition.forEach( function(particle_id) {
+			var particle = parent.particles[particle_id]
+
+			// check whether particle moved between partitions
+			var current_partition = parent.get_partition(particle)
+			if ( parition_id != current_partition ){
+
+				var index = parent.partitions[parition_id].indexOf(particle_id)
+				parent.partitions[parition_id].splice(index,1)
+
+				parent.partitions[current_partition].push(particle_id)
+				particle.draw.style("fill",intToRGB(hashCode(current_partition)))
+			}
+		})
+
+
 	}
 }
 
@@ -42413,14 +42414,13 @@ $('#canvas').mousemove(function(mouse){
 })
 
 // simulation
-var x = nj.array([250.0,250.0]),
-	v = nj.array([0.0,0.0])
-
 var space = new Space()
-for (var i = 0; i < 500; i++ ){
+for (var i = 0; i < 1000; i++ ){
+	var x = nj.array([500.0*Math.random(),500.0*Math.random()]),
+		v = nj.array([0.0,0.0])
+
 	space.add_particle( new Particle(x,v) )
 }
-//space.update_partitions()
 
 var happen = function() {
 
@@ -42429,10 +42429,10 @@ var happen = function() {
 
 		space.update_centroids()
 		space.update_partitions()
-		console.log(space.centroids)
+
 		happen()
 
-	}, 3000 )
+	}, 3 )
 }
 
 happen()
