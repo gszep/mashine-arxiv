@@ -10,5 +10,5 @@ const App = require('./app'),
 
 // setup realtime i/o on socket
 const server = require('http').Server(app)
-server.listen(80)
+server.listen(8000)
 console.log('[Node] HTTP Server Listening')

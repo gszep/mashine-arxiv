@@ -32,4 +32,8 @@ App.prototype.get_views = function() {
 	this.app.get('/filamentRatchets', function(req, res) {
 		res.render('filamentRatchets/index')
 	})
+
+	this.app.get('/wildfires', function(req, res) {
+		res.render('wildfires/index')
+	})
 }
