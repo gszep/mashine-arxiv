@@ -1,5 +1,4 @@
-//var csv is the CSV contents with headers
-var csvJSON = module.exports = function(csv){
+export default function(csv){
 
 	var lines=csv.split('\n')
 	var result = []
@@ -15,6 +14,5 @@ var csvJSON = module.exports = function(csv){
 		result.push(obj)
 	})
 
-	return result //JavaScript object
-	//return JSON.stringify(result) //JSON
+	return result
 }
