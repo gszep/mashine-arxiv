@@ -1,7 +1,10 @@
 /*
-Module initialising server with site and reatime socket.
+Module initialising server with site
 2017. G. Szep
- */
+*/
+
+/*eslint no-console: ["error", { allow: ["log"] }] */
+/*global require */
 
 // serve app with views and static files
 console.log('[Node] Configuring Application')

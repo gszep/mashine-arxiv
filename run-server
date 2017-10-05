@@ -1,6 +1,3 @@
 #!/bin/bash
-
 source env/bin/activate
-browserify mains/filamentRatchets/main.js --outfile public/mains/filamentRatchets.js &
-browserify -t brfs mains/wildfires/main.js --outfile public/mains/wildfires.js &
 node server.js

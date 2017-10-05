@@ -3,13 +3,14 @@ Dresses an express application with views and static files
 2017. G. Szep
  */
 
+/*global require module __dirname*/
 var express = require('express')
 var App = module.exports = function() {
 
 	// initialise express app
 	this.app = express()
 	this.initialise()
-	this.get_views()
+	this.getViews()
 
 	// return dressed app
 	return this.app
@@ -23,7 +24,7 @@ App.prototype.initialise = function() {
 }
 
 // paths to views
-App.prototype.get_views = function() {
+App.prototype.getViews = function() {
 
 	this.app.get('/', function(req, res) {
 		res.render('index')
