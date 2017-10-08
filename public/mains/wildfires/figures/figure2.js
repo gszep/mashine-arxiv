@@ -70,5 +70,5 @@ d3.csv('mains/wildfires/data/usa.csv',
 			.attr('stroke-linecap', 'round')
 			.attr('stroke-width', 1.5)
 			.attr('d', line)
-
-})
+	}
+)
