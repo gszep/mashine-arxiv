@@ -8,13 +8,34 @@
 	<a target="_blank" href="">Extreme Value Statistics</a>,
 	whos theory and application will be explored here.
 </p>
-<div id="map" class="map" style="background: #EEE; border-radius: 4px"></div>
-<script src="mains/wildfires/main.js" type="module"></script>
+<div id="figure1" class="map"></div>
+<script src="mains/wildfires/figures/figure1.js" type="module"></script>
 <p>
 </p>
 <p>
 	Rare events bla bla
 </p>
-<svg></svg>
+
+<!-- /*<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>*/ -->
+<svg id="figure2" width="500" height="250"></svg>
+<script src="mains/wildfires/figures/figure2.js" type="module"></script>
 
 <% include footer %>
