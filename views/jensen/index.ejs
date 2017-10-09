@@ -1,0 +1,21 @@
+<% include header %>
+
+<h4>Jensen&#39;s Inequality</h4>
+<p>
+	In mathematics, Jensen's inequality, named after the Danish mathematician Johan Jensen,
+	relates the value of a convex function of an integral to the integral of the convex function.
+	It was proven by Jensen in 1906.
+</p>
+<p>
+	Suppose we have real random variables \( X,X' \sim p(x)\) and \( \varphi \) is a convex function,
+	the following holds for the expecation \(\mathbb{E}\) with respect to the distribution:
+	$$ \varphi(\mathbb{E}[X]) \leq \mathbb{E}[\varphi(X)]$$
+	$$ \varphi(tX+(1-t)X') \leq t\varphi(X)+(1-t)\varphi(X') \;\;\; \forall t \in [0,1] $$
+</p>
+<svg id="figure1" width="500" height="500" style="display: block; margin: auto"></svg>
+<script src="mains/jensen/figures/figure1.js" type="module"></script>
+<p>
+	Since the secants across the convex function always lie above the function itself,
+	the distribution mean is always mapped higher than the mean of the function. 
+</p>
+<% include footer %>

@@ -37,4 +37,8 @@ App.prototype.getViews = function() {
 	this.app.get('/wildfires', function(req, res) {
 		res.render('wildfires/index')
 	})
+
+	this.app.get('/jensen', function(req, res) {
+		res.render('jensen/index')
+	})
 }
