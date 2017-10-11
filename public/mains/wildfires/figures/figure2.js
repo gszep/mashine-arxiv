@@ -2,26 +2,30 @@
 /* global d3 */
 
 // Set the dimensions of the canvas / graph
-var svg = d3.select('svg'),
+var svg = d3.select('#figure2'),
 	margin = {top: 20, right: 20, bottom: 30, left: 50},
 	width = +svg.attr('width') - margin.left - margin.right,
 	height = +svg.attr('height') - margin.top - margin.bottom,
 	g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 // Get the data
+const acresToKm =  0.0040468599998211
 d3.csv('mains/wildfires/data/usa.csv',
 
 	// data filtering and preprocessing
 	function(datum){
+
 		if(datum.Flag == '0'){
 			return {
+
 				date : new Date(
 					Number(datum.Year),
 					Number(datum.Month),
 					Number(datum.Day)),
+
 				latitude: Number(datum.Latitude),
 				longitude: Number(datum.Longitude),
-				area: 0.0040468599998211*Number(datum.Acres)
+				area: acresToKm*Number(datum.Acres)
 			}
 		}
 	},
@@ -39,33 +43,29 @@ d3.csv('mains/wildfires/data/usa.csv',
 		var x = d3.scaleLog().rangeRound([0,width])
 		var y = d3.scaleLog().rangeRound([height,0])
 
-		// Define the line
-		var line = d3.line()
-			.x(function(datum) { return x(datum.area) })
-			.y(function(datum,i) { return y((nData-i)/nData) })
-
-		x.domain(d3.extent(data, function(datum) { return datum.area }))
+		x.domain(d3.extent(data, function(datum,i) { i; return datum.area }))
 		y.domain(d3.extent(data, function(datum,i) { return (nData-i)/nData }))
 
-		g.append('g')
-			.attr('transform', 'translate(0,'+height+')')
-			.call(d3.axisBottom(x))
+		// scatter data
+		g.selectAll('dot').data(data)
+			.enter().append('circle')
+			.attr('r', 0.5).attr('stroke','red')
+			.attr('cx', function(datum,i) { i; return x(datum.area) })
+			.attr('cy', function(datum,i) { return y((nData-i)/nData) })
 
-		g.append('g')
-			.call(d3.axisLeft(y))
-			.append('text')
-			.attr('fill', '#000')
-			.attr('transform', 'rotate(-90) translate(-10,0)')
-			.attr('y', 6)
-			.attr('dy', '0.71em')
-			.attr('text-anchor', 'end')
-			.text('Survival Function')
+		// axes formatting
+		g.append('g').call(d3.axisBottom(x))
+			.attr('transform','translate(0,'+height+')')
 
-		g.append('path')
-			.datum(data)
-			.attr('fill', 'none')
-			.attr('stroke', 'red')
-			.attr('stroke-width', 0.5)
-			.attr('d',line)
+			.append('text').text('Burnt Acres, km')
+			.attr('transform','translate(400,-10)')
+			.attr('fill','black')
+
+		g.append('g').call(d3.axisLeft(y))
+			.attr('transform','translate(0,0)')
+
+			.append('text').text('Survival Function')
+			.attr('transform','rotate(-90) translate(-20,15)')
+			.attr('fill','black')
 	}
 )
