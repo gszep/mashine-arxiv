@@ -4,7 +4,10 @@
 import delayedLoop from '../lib/loop.js'
 
 var osm = new ol.layer.Tile({
-	source: new ol.source.OSM({wrapX: false})
+	source: new ol.source.Stamen({
+		layer: 'terrain',
+		wrapX: false
+	})
 })
 
 var view = new ol.View({
@@ -26,7 +29,18 @@ var vectors = new ol.source.Vector({
 })
 
 var segments = new ol.layer.Vector({
-	source: vectors
+	source: vectors,
+	style: function(feature){
+		return new ol.style.Style({
+			fill: new ol.style.Fill({
+				color: [150,0,0,0.5]
+			}),
+			stroke: new ol.style.Stroke({
+				color: [150,0,0,0.5],
+				width: 2
+			})
+		})
+	}
 })
 
 map.addLayer(segments)
@@ -43,7 +57,7 @@ d3.csv('mains/wildfires/data/usa.csv',
 				).getTime()/1000|0,
 				latitude: Number(datum.Latitude),
 				longitude: Number(datum.Longitude),
-				acres: Number(datum.Acres)
+				area: 0.0040468599998211*Number(datum.Acres)
 			}
 		}
 	},
@@ -59,8 +73,8 @@ d3.csv('mains/wildfires/data/usa.csv',
 		delayedLoop(10,data.length,i => {
 			var datum = data[i]
 
-			var geometry = new ol.geom.Point([datum.longitude,datum.latitude])
-			var feature = new ol.Feature({area: datum.acres, geometry: geometry})
+			var geometry = new ol.geom.Circle([datum.longitude,datum.latitude],Math.sqrt(datum.area)/100)
+			var feature = new ol.Feature({area: datum.area, geometry: geometry})
 
 			feature.setId(i)
 			vectors.addFeature(feature)

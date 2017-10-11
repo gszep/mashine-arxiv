@@ -1,4 +1,4 @@
-// [Fig.2] - Burnt acres cumulative and density distributions
+// [Fig.2] - Burnt area cumulative and density distributions
 /* global d3 */
 
 // Set the dimensions of the canvas / graph
@@ -7,15 +7,6 @@ var svg = d3.select('svg'),
 	width = +svg.attr('width') - margin.left - margin.right,
 	height = +svg.attr('height') - margin.top - margin.bottom,
 	g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-// Set the ranges
-var x = d3.scaleLinear().rangeRound([0,width])
-var y = d3.scaleLog().rangeRound([height,0])
-
-// Define the line
-var line = d3.line()
-	.x(function(datum) { return x(datum.date) })
-	.y(function(datum) { return y(datum.acres) })
 
 // Get the data
 d3.csv('mains/wildfires/data/usa.csv',
@@ -30,7 +21,7 @@ d3.csv('mains/wildfires/data/usa.csv',
 					Number(datum.Day)),
 				latitude: Number(datum.Latitude),
 				longitude: Number(datum.Longitude),
-				acres: Number(datum.Acres)
+				area: 0.0040468599998211*Number(datum.Acres)
 			}
 		}
 	},
@@ -39,36 +30,42 @@ d3.csv('mains/wildfires/data/usa.csv',
 	function(error,data) {
 		if (error) throw error
 
+		var nData = data.length
 		data.sort(function(first,second) {
-			return first.date-second.date
+			return first.area-second.area
 		})
 
-		x.domain(d3.extent(data, function(d) { return d.date }))
-		y.domain(d3.extent(data, function(d) { return d.acres }))
+		// Set the ranges
+		var x = d3.scaleLog().rangeRound([0,width])
+		var y = d3.scaleLog().rangeRound([height,0])
+
+		// Define the line
+		var line = d3.line()
+			.x(function(datum) { return x(datum.area) })
+			.y(function(datum,i) { return y((nData-i)/nData) })
+
+		x.domain(d3.extent(data, function(datum) { return datum.area }))
+		y.domain(d3.extent(data, function(datum,i) { return (nData-i)/nData }))
 
 		g.append('g')
-			.attr('transform', 'translate(0,' + height + ')')
+			.attr('transform', 'translate(0,'+height+')')
 			.call(d3.axisBottom(x))
-			.select('.domain')
-			.remove()
 
 		g.append('g')
 			.call(d3.axisLeft(y))
 			.append('text')
 			.attr('fill', '#000')
-			.attr('transform', 'rotate(-90)')
+			.attr('transform', 'rotate(-90) translate(-10,0)')
 			.attr('y', 6)
 			.attr('dy', '0.71em')
 			.attr('text-anchor', 'end')
-			.text('Price ($)')
+			.text('Survival Function')
 
 		g.append('path')
 			.datum(data)
 			.attr('fill', 'none')
-			.attr('stroke', 'steelblue')
-			.attr('stroke-linejoin', 'round')
-			.attr('stroke-linecap', 'round')
-			.attr('stroke-width', 1.5)
-			.attr('d', line)
+			.attr('stroke', 'red')
+			.attr('stroke-width', 0.5)
+			.attr('d',line)
 	}
 )
