@@ -1,6 +1,5 @@
 // [Fig.1] - Spatial distribution of wildfires in the USA
-
-/* global ol d3 */
+/* global ol wildfireData */
 import delayedLoop from '../lib/loop.js'
 
 var osm = new ol.layer.Tile({
@@ -30,7 +29,7 @@ var vectors = new ol.source.Vector({
 
 var segments = new ol.layer.Vector({
 	source: vectors,
-	style: function(feature){
+	style: function(){
 		return new ol.style.Style({
 			fill: new ol.style.Fill({
 				color: [150,0,0,0.5]
@@ -44,40 +43,22 @@ var segments = new ol.layer.Vector({
 })
 
 map.addLayer(segments)
-d3.csv('mains/wildfires/data/usa.csv',
+wildfireData.then( data => {
 
-	// data filtering and preprocessing
-	function(datum){
-		if(datum.Flag == '0'){
-			return {
-				unixtime : new Date(
-					Number(datum.Year),
-					Number(datum.Month),
-					Number(datum.Day)
-				).getTime()/1000|0,
-				latitude: Number(datum.Latitude),
-				longitude: Number(datum.Longitude),
-				area: 0.0040468599998211*Number(datum.Acres)
-			}
-		}
-	},
+	data.sort(function(first,second) {
+		return first.date-second.date
+	})
 
-	// plot the data
-	function(error,data) {
-		if (error) throw error
+	delayedLoop(10,data.length,i => {
+		var datum = data[i]
 
-		data.sort(function(first,second) {
-			return first.unixtime-second.unixtime
-		})
+		var geometry = new ol.geom.Circle(
+			[datum.longitude,datum.latitude],
+			Math.sqrt(datum.area)/100
+		)
+		var feature = new ol.Feature({area: datum.area, geometry: geometry})
 
-		delayedLoop(10,data.length,i => {
-			var datum = data[i]
-
-			var geometry = new ol.geom.Circle([datum.longitude,datum.latitude],Math.sqrt(datum.area)/100)
-			var feature = new ol.Feature({area: datum.area, geometry: geometry})
-
-			feature.setId(i)
-			vectors.addFeature(feature)
-		})
-	}
-)
+		feature.setId(i)
+		vectors.addFeature(feature)
+	})
+})

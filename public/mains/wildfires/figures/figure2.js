@@ -1,71 +1,59 @@
-// [Fig.2] - Burnt area cumulative and density distributions
-/* global d3 */
+// [Fig.2] - Burnt area cumulative distribution
+/* global d3 wildfireData */
 
-// Set the dimensions of the canvas / graph
-var svg = d3.select('#figure2'),
-	margin = {top: 20, right: 20, bottom: 30, left: 50},
-	width = +svg.attr('width') - margin.left - margin.right,
-	height = +svg.attr('height') - margin.top - margin.bottom,
-	g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+// initialising figure
+import Figure from '../lib/figure.js'
+var figure = new Figure('#figure2')
 
-// Get the data
-const acresToKm =  0.0040468599998211
-d3.csv('mains/wildfires/data/usa.csv',
+// set axes frame
+var x = d3.scaleLog().rangeRound([0,figure.width])
+var y = d3.scaleLog().rangeRound([figure.height,0])
 
-	// data filtering and preprocessing
-	function(datum){
+wildfireData.then( data => {
 
-		if(datum.Flag == '0'){
-			return {
+	data.sort(function(first,second) {
+		return first.area-second.area
+	})
 
-				date : new Date(
-					Number(datum.Year),
-					Number(datum.Month),
-					Number(datum.Day)),
-
-				latitude: Number(datum.Latitude),
-				longitude: Number(datum.Longitude),
-				area: acresToKm*Number(datum.Acres)
-			}
+	// define value domains
+	x.domain(d3.extent(data,
+		function(datum) {
+			return datum.area
 		}
-	},
+	))
 
-	// plot the data
-	function(error,data) {
-		if (error) throw error
+	y.domain(d3.extent(data,
+		function(datum,i) {
+			return (data.length-i)/data.length
+		}
+	))
 
-		var nData = data.length
-		data.sort(function(first,second) {
-			return first.area-second.area
+	// scatter data
+	figure.graph.selectAll('dot').data(data)
+		.enter().append('circle')
+
+		.attr('cx', function(datum){
+			return x(datum.area)
 		})
 
-		// Set the ranges
-		var x = d3.scaleLog().rangeRound([0,width])
-		var y = d3.scaleLog().rangeRound([height,0])
+		.attr('cy', function(datum,i) {
+			return y((data.length-i)/data.length)
+		})
 
-		x.domain(d3.extent(data, function(datum,i) { i; return datum.area }))
-		y.domain(d3.extent(data, function(datum,i) { return (nData-i)/nData }))
+		.attr('r', 0.5).attr('stroke','red')
 
-		// scatter data
-		g.selectAll('dot').data(data)
-			.enter().append('circle')
-			.attr('r', 0.5).attr('stroke','red')
-			.attr('cx', function(datum,i) { i; return x(datum.area) })
-			.attr('cy', function(datum,i) { return y((nData-i)/nData) })
+	// axes formatting
+	figure.graph.append('g').call(d3.axisBottom(x))
+		.attr('transform','translate(0,'+figure.height+')')
 
-		// axes formatting
-		g.append('g').call(d3.axisBottom(x))
-			.attr('transform','translate(0,'+height+')')
+		.append('text').text('Burnt Acres, km')
+		.attr('transform','translate(400,-10)')
+		.attr('fill','black')
 
-			.append('text').text('Burnt Acres, km')
-			.attr('transform','translate(400,-10)')
-			.attr('fill','black')
+	figure.graph.append('g').call(d3.axisLeft(y))
+		.attr('transform','translate(0,0)')
 
-		g.append('g').call(d3.axisLeft(y))
-			.attr('transform','translate(0,0)')
-
-			.append('text').text('Survival Function')
-			.attr('transform','rotate(-90) translate(-20,15)')
-			.attr('fill','black')
-	}
-)
+		.append('text').text('Survival Function')
+		.attr('transform','rotate(-90) translate(-20,15)')
+		.attr('fill','black')
+})
