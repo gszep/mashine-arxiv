@@ -1,5 +1,5 @@
 // [Fig.3] - Burnt area density distribution
-/* global d3 wildfireData */
+/* global d3 math wildfireData */
 
 // initialising figure
 import Figure from '../lib/figure.js'
@@ -71,3 +71,26 @@ wildfireData.then( data => {
 		.attr('transform','rotate(-90) translate(-20,15)')
 		.attr('fill','black')
 })
+
+// baysian linear regression
+function model(input,alpha,beta){
+	return alpha*input+beta
+}
+
+function normal(input,mean,sigma){
+	var norm = sigma*math.sqrt(2*Math.PI),
+		z = (input-mean)/sigma
+	return math.exp(math.pow(z,2)/2)/norm
+}
+
+function covariance(inputs,alpha,beta){
+	var phi = math.multiply(math.transpose(inputs),inputs)
+	return math.inv(math.multiply(math.eye(phi.size()),alpha)-math.multiply(phi,beta))
+}
+
+function predictive(target,inputs,outputs,alpha,beta){
+	var sigma = covariance(inputs,alpha,beta)
+	var mean = math.multiply(beta,sigma,math.transpose(inputs),targets)
+	var mean = math.multiply(math.transpose(mean),inputs)
+	return normal(target,mean,sigma)
+}
